@@ -1,0 +1,153 @@
+@font-face {
+    font-family: "nassim";
+    font-style: normal;
+    font-weight: normal;
+    src: local("\263A"), url(../fonts/nassim-regular.woff?4c9de12961b9ceb83ab9546fc73fe25f) format("woff"), url(../fonts/nassim-regular.ttf?cbeba4bf20170a41c4143d9a5bfe62ad) format("truetype"), url(../fonts/nassim-regular.eot?43d3028934068771f79a03886575cd7c) format("eot");
+}
+
+*,
+html,
+input,
+table,
+td,
+a,
+p,
+div,
+strong,
+ul,
+li,
+ul > li,
+li > a,
+button,
+span,
+h1,
+h2,
+h3,
+h4 ,
+h5,
+h6{
+    font-family: nassim, "Times New Roman" ;
+}
+
+body{
+    padding-top: 50px;
+    background: #f1f1f1 url('../images/body-bg.png');
+}
+ul{
+    -webkit-padding-start: 0px;
+    -moz-padding-start: 0px;
+    padding-start:0px;
+}
+/* Navbar brand */
+
+.navbar .navbar-brand{
+    font-size: 20px;
+    color: #eee;
+    letter-spacing: -1px;
+}
+.navbar .navbar-brand strong{
+
+    color: #fff;
+    padding-left: 3px;
+    letter-spacing: -1px;
+}
+
+/* header */
+header{
+    background: #3e4249  url('../images/header-bg.png');
+    color: #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #080808;
+}
+h1.header-title{
+    font-weight: bold;
+    letter-spacing: -2px;
+}
+
+
+.pull-left .btn{
+    margin: 20px 0 10px;
+}
+
+/* List Group  */
+
+.list-group-item:hover{
+    background: #eee;
+    cursor: pointer;
+}
+.list-group-item:hover .buttons, table.table tr:hover .row-buttons{
+    display: block;
+}
+
+
+.list-group-item-heading{
+    font-size: 150%;
+}
+.list-group-item-text{
+    color: #999;
+}
+
+.buttons{
+    position: absolute;
+    height: 20px;
+    width: 80px;
+    left: 10px;
+    top:10px;
+    text-align: center;
+    display: none;
+}
+
+.panel-footer small, .modal-footer small{
+    color: #999;
+}
+
+
+
+/* Modal */
+.modal-footer{
+    text-align: left;
+}
+
+
+input.task-input{
+    width: 100%;
+    border: none;
+    font-size: 18px;
+    height: 46px;
+    line-height: 1.3333;
+    color: #555;
+    display: block;
+    font-style: italic;
+}
+
+input.task-input:focus, input.task-input:active{
+    border: none;
+    outline: none;
+}
+.done{
+    text-decoration: line-through;
+    color: #ddd;
+}
+
+table.table tbody tr td{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.task-item{
+    position: relative;
+}
+.row-buttons{
+    position: absolute;
+    height: 20px;
+    width: 40px;
+    left: 10px;
+    top:15px;
+    text-align: center;
+    display: none;
+}
+ a i{
+    padding-top: 3px;
+}
+
+
