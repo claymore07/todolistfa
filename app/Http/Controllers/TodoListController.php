@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoListCreatRequest;
+use App\TodoList;
+use Auth;
 use Illuminate\Http\Request;
 
 class TodoListController extends Controller
@@ -13,7 +16,9 @@ class TodoListController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $todolists = $user->todolists()->orderBy('updated_at','desc')->get();
+        return view('todolists.index', compact('todolists'));
     }
 
     /**
@@ -24,17 +29,22 @@ class TodoListController extends Controller
     public function create()
     {
         //
+        $todolist = new TodoList();
+        return view('todolists.form', compact('todolist'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \app\Http\Requests\TodoListCreatRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TodoListCreatRequest $request)
     {
         //
+        $input = $request->all();
+        $todolist = Auth::user()->todolists()->create($input);
+        return view('todolists.item', compact('todolist'));
     }
 
     /**
@@ -57,6 +67,9 @@ class TodoListController extends Controller
     public function edit($id)
     {
         //
+
+        $todolist = Auth::user()->todolists()->findOrFail($id);
+        return view('todolists.form', compact('todolist'));
     }
 
     /**
@@ -66,9 +79,12 @@ class TodoListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TodoListCreatRequest $request, $id)
     {
         //
+        $todolist = Auth::user()->todolists()->findOrFail($id);
+        $todolist->update($request->all());
+        return view('todolists.item', compact('todolist'));
     }
 
     /**
@@ -80,5 +96,8 @@ class TodoListController extends Controller
     public function destroy($id)
     {
         //
+        $todolist = Auth::user()->todolists()->findOrFail($id);
+        $todolist->delete();
+        return $todolist;
     }
 }
