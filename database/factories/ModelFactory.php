@@ -22,3 +22,27 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Todolist::class, function (Faker\Generator $faker) {
+
+    $faker->languageCode ='en_US';
+    return [
+        'title' => $faker->sentence(7,10),
+        'user_id' => $faker->numberBetween(1,4),
+        'description'=>$faker->paragraph(rand(5,10), true),
+
+
+    ];
+});
+
+$factory->define(App\Task::class, function (Faker\Generator $faker) {
+
+    $faker->languageCode ='en_US';
+    return [
+        'title' => $faker->sentence(7,10),
+        'todolist_id' => $faker->numberBetween(1,10),
+        'completed_at' => rand(0,1) == 0 ? NULL : $faker->dateTime(),
+
+
+    ];
+});
