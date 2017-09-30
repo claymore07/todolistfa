@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskCreateRequest;
+use App\Task;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+
+    public function __construct()
+    {
+        // check if session expired for ajax request
+        $this->middleware('ajax-session-expired');
+        // check if user is autenticated for non-ajax request
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +44,12 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskCreateRequest $request, $todoListId)
     {
         //
+        $todolist = Auth::user()->todolists()->findOrFail($todoListId);
+        $task = $todolist->tasks()->create($request->all());
+        return view('tasks.item', compact('task'));
     }
 
     /**
@@ -64,11 +79,16 @@ class TaskController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     * @param  int  $todolistId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $todolistId ,$id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $task->completed_at = $request['completed_at'] == 'true' ? Carbon::now() : null;
+        $affectedRow = $task->update();
+        echo $affectedRow;
     }
 
     /**
@@ -77,8 +97,12 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($todolistId, $id)
     {
         //
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return $task;
+
     }
 }

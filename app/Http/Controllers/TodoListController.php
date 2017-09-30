@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class TodoListController extends Controller
 {
+
+    public function __construct()
+    {
+        // check if session expired for ajax request
+        $this->middleware('ajax-session-expired');
+        // check if user is autenticated for non-ajax request
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,6 +64,12 @@ class TodoListController extends Controller
     public function show($id)
     {
         //
+
+        $todolists = Auth::user()->todolists()->findOrFail($id);
+
+        $tasks = $todolists->tasks()->orderBy('created_at', 'desc')->get();
+
+        return view('tasks.index', compact('todolists','tasks'));
     }
 
     /**

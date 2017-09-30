@@ -3,49 +3,37 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">لیست کارها</h4>
+                <h4 class="modal-title">لیست کارهای</h4>
+                <p><strong id="task-modal-subtitle"></strong></p>
             </div>
             <div class="modal-body">
                 <div class="panel panel-default">
                     <table class="table">
                         <thread>
-                            <td style="width: 50px; vertical-align: middle"><input type="checkbox" name="check_all" id="check-all"></td>
-                            <td><input type="text" placeholder="عنوان کار جدید را وارد کنید..." class="task-input"></td>
-
+                            <td width="50" style="vertical-align: middle;">
+                                <input type="checkbox" name="check_all" id="check-all">
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <form id="task-form">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" id="selected-todo-list" >
+                                        <input type="text" name="title" id="task-title" placeholder="عنوان کار جدید را وارد کنید..." class="task-input">
+                                    </form>
+                                </div>
+                            </td>
                         </thread>
+                        <tbody id="task-table-body">
 
-
-                        <tbody>
-                        <tr class="task-item">
-                            <td style="width: 50px; vertical-align: middle">
-                                <input type="checkbox" class="check-item"></td>
-                            <td  class="task-item-title done">
-                                کار اول
-                                <div class="row-buttons">
-                                    <a href="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr class="task-item">
-                            <td style="width: 50px; vertical-align: middle">
-                                <input type="checkbox" class="check-item"></td>
-                            <td  class="task-item-title">
-                                کار اول
-                                <div class="row-buttons">
-                                    <a href="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                                </div>
-                            </td>
-
-                        </tr>
 
                         </tbody>
                     </table>
+
                 </div>
             </div>
             <div class="modal-footer clearfix" >
                 <div class="pull-left">
-                    <small>3 کار مانده است.</small>
+                    <small id="active-counter">3</small><small> کار مانده است.</small>
                 </div>
                 <div class="pull-right">
                     <a href="#" id="all-tasks" class="btn btn-xs btn-default active  filter-btn">تمام کارها</a>
