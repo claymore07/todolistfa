@@ -18,7 +18,7 @@
                                     <form id="task-form">
                                         {{ csrf_field() }}
                                         <input type="hidden" id="selected-todo-list" >
-                                        <input type="text" name="title" id="task-title" placeholder="عنوان کار جدید را وارد کنید..." class="task-input">
+                                        <input type="text" name="title" id="task-title" required placeholder="عنوان کار جدید را وارد کنید..." class="task-input">
                                     </form>
                                 </div>
                             </td>

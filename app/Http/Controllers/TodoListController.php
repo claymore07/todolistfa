@@ -25,7 +25,7 @@ class TodoListController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $todolists = $user->todolists()->orderBy('updated_at','desc')->get();
+        $todolists = $user->todolists()->with('tasks')->orderBy('updated_at','desc')->get();
         return view('todolists.index', compact('todolists'));
     }
 
